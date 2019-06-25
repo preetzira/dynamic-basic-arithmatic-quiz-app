@@ -17,6 +17,9 @@ const Result = (props) => {
              <ListItem className={`list-group-item  text-bold ${isCorrect ? "text-success" : "text-danger" }`}>
                your answer: <b>{ props.question.answered }</b> ({isCorrect ? "correct" : "incorrect" })
              </ListItem>
+             <ListItem>
+               correct answer is: (<b>{ props.question.answer }</b>)
+             </ListItem>
            </ListGroup>
          </div>
 }
