@@ -19,6 +19,11 @@ const Quiz = (props) => {
   const currentQuestion    = Object(props.quiz[questionId-1])
 
   useEffect(()=>{
+    if(questionId){
+      window.onbeforeunload = function() {
+          return "";
+      }
+    }
     if(questionId <= props.quizRequirements.maxQuestions && (props.quiz.length < questionId || !props.quiz.length) ){
       props.dispatch( generateQuiz(props.quizRequirements) )
     }

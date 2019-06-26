@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Question from './Question'
 import ListGroup from './sharedComponents/ListGroup'
 import ListItem from './sharedComponents/ListItem'
@@ -25,6 +25,12 @@ const Result = (props) => {
 }
 
 const Results = (props) => {
+
+  useEffect(()=>{
+    window.onbeforeunload = function() {
+        return "";
+    }
+  },[])
 
   if(!props.quizRequirements.maxQuestions){
     return <Redirect to="/index" />

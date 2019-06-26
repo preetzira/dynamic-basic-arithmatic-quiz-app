@@ -34,7 +34,7 @@ const Quizes = (props) => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(()=>{    
     if(isSubmitted){
       props.dispatch( actionSetRequirements({quizRequirements:{maxRandomValue,maxQuestions,operators}}) )
     }
