@@ -11,10 +11,11 @@ import { connect } from 'react-redux'
 import { actionSetRequirements } from '../actions/index'
 
 const Quizes = (props) => {
+
   const [maxQuestions,setMaxQuestions] = useState(20)
   const [maxRandomValue,setMaxRandomValue] = useState(10)
+  const [operators,setOperators] = useState("+-*/")
   const [isSubmitted,setIsSubmitted] = useState(false)
-
 
   const handleSubmit = () => {
     if(maxQuestions === 0) setMaxQuestions(20)
@@ -26,19 +27,23 @@ const Quizes = (props) => {
     if(e.which === 13){
       handleSubmit()
     }
+    const operatorEvents = [42,43,45,47]
+    if(e.target.name == "operators" && !operatorEvents.includes(e.which)){
+      e.preventDefault()
+      return
+    }
   }
 
   useEffect(()=>{
     if(isSubmitted){
-      props.dispatch( actionSetRequirements({quizRequirements:{maxRandomValue,maxQuestions}}) )
+      props.dispatch( actionSetRequirements({quizRequirements:{maxRandomValue,maxQuestions,operators}}) )
     }
-  },[maxQuestions,maxRandomValue,isSubmitted])
+  },[maxQuestions,maxRandomValue,operators,isSubmitted])
 
   if(props.quizRequirements.hasOwnProperty('maxQuestions')){
     const questionId = props.quiz.length ? props.quiz.length-1 : 1
     return <Redirect to={`/question/${questionId}`} />
   }
-
 
   return <div className="col-12 col-md-6">
           <Card className="p-5 mx-5 mb-4"
@@ -74,6 +79,21 @@ const Quizes = (props) => {
                     onKeyPress={handleEvent}
                   />
                   <Label htmlFor={`maxRandomValue${props.type}Quiz`} value="Max operand value to work with"/>
+                </FormGroup>
+                <FormGroup className="form-label-group">
+                  <Input
+                    id={`operators${props.type}Quiz`}
+                    type="text"
+                    name="operators"
+                    value={operators}
+                    className="form-control form-control-custom"
+                    aria-describedby="inputGroupPrepend"
+                    placeholder="Total question you want to try"
+                    onUpdate={ (value) => setOperators(value) }
+                    onKeyPress={handleEvent}
+                    maxLength="4"
+                  />
+                  <Label htmlFor={`operators${props.type}Quiz`} value="Operators you want to try"/>
                 </FormGroup>
               </>
             }

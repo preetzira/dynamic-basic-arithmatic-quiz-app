@@ -3,11 +3,11 @@ module.exports = function(){
     genrateOperand : (maxRandomValue) => {
       return Math.ceil(Math.random()*maxRandomValue)
     },
-    pickOperand : (operator) => {
-      return operator[parseInt(Math.random()*4)]
+    pickOperator : (operators) => {
+      return operators[parseInt(Math.random()*operators.length)]
     },
-    getAnswer : (operatorOne, operatorTwo, operand) => {
-      return eval(operatorOne + operand + operatorTwo)
+    getAnswer : (operandOne, operandTwo, operator) => {
+      return eval(operandOne + operator + operandTwo)
     }
   }
 }

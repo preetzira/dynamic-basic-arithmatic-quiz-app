@@ -5,15 +5,15 @@ export const ACTION_ADD_QUESTION_IN_QUIZ = "ACTION_ADD_QUESTION_IN_QUIZ"
 export const ACTION_SUBMIT_ANSWER = "ACTION_SUBMIT_ANSWER"
 export const ACTION_RESTART_QUIZ = "ACTION_RESTART_QUIZ"
 
-export function generateQuiz(maxRandomValue){
+export function generateQuiz({maxRandomValue, operators}){
+
   return dispatch => {
 
     const generateQuiz = new quiz()
-    const operators = ["+","-","*","/"]
 
     const operandOne = generateQuiz.genrateOperand(maxRandomValue)
     const operandTwo = generateQuiz.genrateOperand(maxRandomValue)
-    const operator = generateQuiz.pickOperand(operators)
+    const operator = generateQuiz.pickOperator( operators.split('') )
 
     const newQuiz = {
       id: Date.now(),

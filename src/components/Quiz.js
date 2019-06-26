@@ -20,7 +20,7 @@ const Quiz = (props) => {
 
   useEffect(()=>{
     if(questionId <= props.quizRequirements.maxQuestions && (props.quiz.length < questionId || !props.quiz.length) ){
-      props.dispatch( generateQuiz(props.quizRequirements.maxRandomValue) )
+      props.dispatch( generateQuiz(props.quizRequirements) )
     }
   },[questionId])
 
