@@ -21,22 +21,21 @@ const Quiz = (props) => {
   useEffect(()=>{
     if(questionId){
       window.onbeforeunload = function() {
-          return "";
+        return "";
       }
     }
     if(questionId <= props.quizRequirements.maxQuestions && (props.quiz.length < questionId || !props.quiz.length) ){
       props.dispatch( generateQuiz(props.quizRequirements) )
     }
-  },[questionId])
+  },[questionId,props])
 
   const handleSubmit = () => {
     props.dispatch( actionLoading() )
-    props.dispatch( actionSubmitAnswer({currentQuestion,answer:Number(answer)}) )
+    props.dispatch( actionSubmitAnswer({currentQuestion,answer}) )
     setAnswer('')
     if(questionId === props.quizRequirements.maxQuestions){
       props.history.push('/results')
-    }
-    props.history.push(`/question/${++questionId}`)
+    } else props.history.push(`/question/${++questionId}`)
   }
 
   const handleEvent = (e) => {
@@ -46,7 +45,7 @@ const Quiz = (props) => {
   }
 
   if(!props.quizRequirements.maxQuestions){
-    return <Redirect to="/index" />
+    return <Redirect to="/" />
   }
 
   if(props.quizRequirements.maxQuestions){
@@ -74,8 +73,8 @@ const Quiz = (props) => {
                               name="answer"
                               className="form-control"
                               placeholder="enter your answer here"
-                              value={ currentQuestion.isSubmitted ? currentQuestion.answered : answer }
-                              onUpdate={ currentQuestion.isSubmitted ? false : (answer) => setAnswer(answer) }
+                              value = { currentQuestion.isSubmitted ? currentQuestion.answered : answer }
+                              onUpdate = { currentQuestion.isSubmitted ? false : (answer) => setAnswer(answer) }
                               disabled = { currentQuestion.isSubmitted ?
                                 true
                                 : false }
@@ -102,7 +101,7 @@ const Quiz = (props) => {
                content={
                    <>
                      <b className="text-danger">Caution! </b>
-                     make sure the decimal<b className="text-danger">* </b> are upto
+                     make sure the decimal<b className="text-danger"> * </b> are upto
                      <b> 2</b> digits.
                    </>
                  }

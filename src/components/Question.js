@@ -4,9 +4,9 @@ import Spinner from './sharedComponents/Spinner'
 const Question = (props) => {
   return <div className="text-center">
             {
-              props.currentQuestion.hasOwnProperty('operandOne') ?
+              props.currentQuestion.hasOwnProperty('question') ?
                 <b>
-                  {`${props.currentQuestion.operandOne} ${props.currentQuestion.operator} ${props.currentQuestion.operandTwo}`}
+                  {props.currentQuestion.question}
                 </b>
               : <Spinner className="border d-flex mx-auto"/>
             }

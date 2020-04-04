@@ -1,14 +1,13 @@
 import React, { useState,useEffect } from 'react'
 
-const Input = (props) => {
-  const { onUpdate, ...prop } = props
-  const [value,setValue] = useState(props.value?props.value:"");
+const Input = ({ onUpdate, ...prop }) => {
+  const [value,setValue] = useState(prop.value ? prop.value : "");
   const handleChange = e => {
     setValue(e.target.value)
   }
   useEffect(()=>{    
     if(onUpdate){
-      props.onUpdate(value)
+      onUpdate(value)
     }
   },[value])
   return  <input value={value} onChange={handleChange} {...prop}/>

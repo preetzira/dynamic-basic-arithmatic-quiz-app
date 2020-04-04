@@ -5,25 +5,17 @@ export const ACTION_ADD_QUESTION_IN_QUIZ = "ACTION_ADD_QUESTION_IN_QUIZ"
 export const ACTION_SUBMIT_ANSWER = "ACTION_SUBMIT_ANSWER"
 export const ACTION_RESTART_QUIZ = "ACTION_RESTART_QUIZ"
 
-export function generateQuiz({maxRandomValue, operators}){
-
+export function generateQuiz({maxRandomValue, operators, maxOperands}){
   return dispatch => {
-
-    const generateQuiz = new quiz()
-
-    const operandOne = generateQuiz.genrateOperand(maxRandomValue)
-    const operandTwo = generateQuiz.genrateOperand(maxRandomValue)
-    const operator = generateQuiz.pickOperator( operators.split('') )
-
+    const generateQuestion = new quiz()
+    const question = generateQuestion.generateQuestion({maxRandomValue, operators, maxOperands})
     const newQuiz = {
-      id: Date.now(),
-      operandOne,
-      operandTwo,
-      operator,
-      answer : generateQuiz.getAnswer(operandOne,operandTwo,operator).toFixed(2),
+      id : Date.now(),
+      question,
+      answer : generateQuestion.generateAnswer(question).toFixed(2),
       answered : "",
-      isSubmitted: false,
-      isCorrect:false
+      isSubmitted : false,
+      isCorrect : false
     }
     dispatch( actionAddQuiz(newQuiz) )
   }

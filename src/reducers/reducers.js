@@ -21,30 +21,27 @@ export default function(state = initialState, action){
         quizRequirements : action.payload.quizRequirements,
         startedAt : Date.now()
       }
-      break;
     case ACTION_LOADING:
         return {
           ...state,
           isLoading : true
         }
-        break;
     case ACTION_ADD_QUESTION_IN_QUIZ:
         return {
           ...state,
           quiz : [...state.quiz, action.payload],
           isLoading : false
         }
-        break;
     case ACTION_SUBMIT_ANSWER:
         return {
           ...state,
           quiz: [...state.quiz].map((question)=>{
                   if(question.id === action.payload.currentQuestion.id){
-
-                    question.answered = action.payload.answer
+                    const answered = (action.payload.answer && parseFloat(action.payload.answer).toFixed(2)) || "blank"
+                    question.answered = answered
                     question.isSubmitted = true
 
-                    if(question.answer == action.payload.answer){
+                    if(question.answer === answered){
                       question.isCorrect = true
                     }
                   }
@@ -53,7 +50,6 @@ export default function(state = initialState, action){
               ),
           isLoading : false
         }
-        break;
     case ACTION_RESTART_QUIZ:
         return {
           ...state,
@@ -62,7 +58,6 @@ export default function(state = initialState, action){
           quiz : [],
           startedAt : null
         }
-        break;
     default:
       return state
   }

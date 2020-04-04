@@ -12,7 +12,7 @@ const Result = (props) => {
   return <div key={props.id} className="col-md-6 col-12 mx-auto my-2">
            <ListGroup>
              <ListItem>
-               Q no. {Number(props.id)+1}: <Question currentQuestion={props.question}/>
+               Question no. {Number(props.id)+1}: <Question currentQuestion={props.question}/>
              </ListItem>
              <ListItem className={`list-group-item  text-bold ${isCorrect ? "text-success" : "text-danger" }`}>
                your answer: <b>{ props.question.answered }</b> ({isCorrect ? "correct" : "incorrect" })
@@ -33,7 +33,7 @@ const Results = (props) => {
   },[])
 
   if(!props.quizRequirements.maxQuestions){
-    return <Redirect to="/index" />
+    return <Redirect to="/" />
   }
 
   const handleClick = () => {
@@ -56,6 +56,7 @@ const Results = (props) => {
 }
 
 function mapStateToProps({state}){
+  console.log(state)
   const { quiz, quizRequirements, isLoading, startedAt } = state
   return { quiz, quizRequirements, isLoading, startedAt }
 }
