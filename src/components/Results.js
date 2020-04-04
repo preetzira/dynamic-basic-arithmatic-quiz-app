@@ -56,7 +56,6 @@ const Results = (props) => {
 }
 
 function mapStateToProps({state}){
-  console.log(state)
   const { quiz, quizRequirements, isLoading, startedAt } = state
   return { quiz, quizRequirements, isLoading, startedAt }
 }
