@@ -1,6 +1,6 @@
 [build]
-  command = "npm run build"
-  publish = "build"
+  command = "GENERATE_SOURCEMAP=false NODE_ENV=production npm run build"
+  publish = "build/"
 
 [build.environment]
   GENERATE_SOURCEMAP = "true"
