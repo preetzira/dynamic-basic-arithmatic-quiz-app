@@ -1,5 +1,5 @@
 module.exports = function(){
-  const context = {
+  return {
     genrateOperand : (maxRandomValue) => {
       return Math.ceil(Math.random()*maxRandomValue)
     },
@@ -9,7 +9,7 @@ module.exports = function(){
     generateQuestion: ({maxRandomValue, operators, maxOperands}) =>{
       let question = []
       for (let index = 0; index < maxOperands; index++) {
-        question.push(`${context.genrateOperand(maxRandomValue)} ${index < maxOperands-1 ? context.pickOperator(operators): ''}`)
+        question.push(`${this.genrateOperand(maxRandomValue)} ${index < maxOperands-1 ? this.pickOperator(operators): ''}`)
       }
       return question.join(' ').trim()
     },
@@ -17,7 +17,6 @@ module.exports = function(){
       return eval(question)
     }
   }
-  return context
 }
 
 function evaluate(expression) {
