@@ -1,19 +1,19 @@
-module.exports = function(){
+module.exports = function () {
   return {
-    genrateOperand : (maxRandomValue) => {
-      return Math.ceil(Math.random()*maxRandomValue)
+    genrateOperand: (maxRandomValue) => {
+      return Math.ceil(Math.random() * maxRandomValue)
     },
-    pickOperator : (operators) => {
-      return operators[parseInt(Math.random()*operators.length)]
+    pickOperator: (operators) => {
+      return operators[parseInt(Math.random() * operators.length)]
     },
-    generateQuestion: ({maxRandomValue, operators, maxOperands}) =>{
+    generateQuestion: function ({ maxRandomValue, operators, maxOperands }) {
       let question = []
       for (let index = 0; index < maxOperands; index++) {
-        question.push(`${this.genrateOperand(maxRandomValue)} ${index < maxOperands-1 ? this.pickOperator(operators): ''}`)
+        question.push(`${this.genrateOperand(maxRandomValue)} ${index < maxOperands - 1 ? this.pickOperator(operators) : ''}`)
       }
       return question.join(' ').trim()
     },
-    generateAnswer: (question) =>{
+    generateAnswer: (question) => {
       return eval(question)
     }
   }
